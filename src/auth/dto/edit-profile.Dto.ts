@@ -1,11 +1,27 @@
 /* eslint-disable prettier/prettier */
-import { Gender } from "@prisma/client";
+import { Gender } from '@prisma/client';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsString,
+} from 'class-validator';
 
 /* eslint-disable prettier/prettier */
-export class EditProfileDto{
+export class EditProfileDto {
+  @IsNotEmpty()
+  @IsString()
   name: string;
-    email: string;
-    phone: string;
-    gender: Gender;
-    password: string;
+  @IsNotEmpty()
+  @IsString()
+  @IsEmail()
+  email: string;
+  @IsNotEmpty()
+  @IsString()
+  phone: string;
+  @IsNotEmpty()
+  @IsString()
+  gender: Gender;
+  @IsNotEmpty()
+  @IsString()
+  password: string;
 }

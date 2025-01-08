@@ -5,7 +5,6 @@ import {
   Post,
   Body,
   Patch,
-  Param,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ChangePasswordDto } from './dto/change-password.Dto';
@@ -15,6 +14,7 @@ import { UserInfo } from 'src/models/userInfo.model';
 import { CurrentUser } from 'src/decorators/current-user.decorator';
 import { Roles } from 'src/decorators/role.decorator';
 import { IsPublic } from 'src/decorators/is-public.decorator';
+import { SignupDto } from './dto/signup.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -39,8 +39,14 @@ export class AuthController {
   }
 
   @IsPublic()
-  @Post()
+  @Post("login")
   async login(@Body() loginDto: LoginDto) {
     return await this.authService.login(loginDto);
+  }
+
+  @IsPublic()
+  @Post("signup")
+  async signup(@Body() signupDto: SignupDto){
+    return await this.authService.signup(signupDto);
   }
 }

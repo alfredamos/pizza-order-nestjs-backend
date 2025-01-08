@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { UserResponseModel } from './userResponse.model';
 
 export class AuthResponseModel { 

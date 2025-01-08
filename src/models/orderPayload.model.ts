@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { CartItem } from "@prisma/client";
 
 export class OrderPayload {

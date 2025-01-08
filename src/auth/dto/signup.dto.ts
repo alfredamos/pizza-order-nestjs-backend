@@ -1,6 +1,7 @@
-import { Gender } from "@prisma/client";
+/* eslint-disable prettier/prettier */
+import { Gender } from '@prisma/client';
 
-export class SignupModel {
+export class SignupDto {
   address: string;
   image: string;
   name: string;

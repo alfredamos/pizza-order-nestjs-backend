@@ -19,7 +19,7 @@ import { PrismaService } from './prisma/prisma.service';
     AuthModule,
     CartItemsModule,
     OrdersModule,
-    StripeModule,
+    StripeModule.forRootAsync(),
     PrismaModule,
     UsersModule,
     ConfigModule.forRoot({

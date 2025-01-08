@@ -19,8 +19,8 @@ export class OrdersController {
 
   @Roles('Admin', 'Staff', 'User')
   @Post()
-  createOrder(@Body() createOrderDto: UpdateOrderDto) {
-    return this.ordersService.createOrder(createOrderDto);
+  async createOrder(@Body() createOrderDto: UpdateOrderDto) {
+    return await this.ordersService.createOrder(createOrderDto);
   }
 
   @Roles('Admin', 'Staff', 'User')

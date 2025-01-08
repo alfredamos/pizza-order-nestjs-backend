@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { PizzasService } from './pizzas.service';
 import { CreatePizzaDto } from './dto/create-pizza.dto';
 import { UpdatePizzaDto } from './dto/update-pizza.dto';
@@ -8,27 +17,27 @@ export class PizzasController {
   constructor(private readonly pizzasService: PizzasService) {}
 
   @Post()
-  create(@Body() createPizzaDto: CreatePizzaDto) {
-    return this.pizzasService.create(createPizzaDto);
+  async create(@Body() createPizzaDto: CreatePizzaDto) {
+    return await this.pizzasService.createPizza(createPizzaDto);
   }
 
   @Get()
-  findAll() {
-    return this.pizzasService.findAll();
+  async findAll() {
+    return await this.pizzasService.getAllPizzas();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.pizzasService.findOne(+id);
+    return this.pizzasService.detailPizza(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePizzaDto: UpdatePizzaDto) {
-    return this.pizzasService.update(+id, updatePizzaDto);
+    return this.pizzasService.editPizza(id, updatePizzaDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.pizzasService.remove(+id);
+    return this.pizzasService.deletedPizza(id);
   }
 }

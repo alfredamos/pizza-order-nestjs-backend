@@ -1,26 +1,57 @@
-import { Injectable } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePizzaDto } from './dto/create-pizza.dto';
 import { UpdatePizzaDto } from './dto/update-pizza.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class PizzasService {
-  create(createPizzaDto: CreatePizzaDto) {
-    return 'This action adds a new pizza';
+  constructor(private prisma: PrismaService){}
+
+  async createPizza(pizza: CreatePizzaDto) {
+    const newPizza = await this.prisma.pizza.create({ data: pizza });
+
+    if (!newPizza) {
+      throw new BadRequestException('Pizza not created');
+    }
+
+    return newPizza;
   }
 
-  findAll() {
-    return `This action returns all pizzas`;
+  async editPizza(id: string, pizza: UpdatePizzaDto) {
+    await this.detailPizza(id);
+
+    const editedPizza = await this.prisma.pizza.update({
+      data: pizza,
+      where: { id },
+    });
+
+    if (!editedPizza) {
+      throw new BadRequestException(`Pizza with id: ${id} cannot be updated`);
+    }
+
+    return editedPizza;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} pizza`;
+  async deletedPizza(id: string) {
+    await this.detailPizza(id);
+
+    const deletedPizza = await this.prisma.pizza.delete({ where: { id } });
+
+    return deletedPizza;
   }
 
-  update(id: number, updatePizzaDto: UpdatePizzaDto) {
-    return `This action updates a #${id} pizza`;
+  async detailPizza(id: string) {
+    const pizza = await this.prisma.pizza.findUnique({ where: { id } });
+
+    if (!pizza) {
+      throw new NotFoundException(`Pizza with id: ${id} is not found`);
+    }
+
+    return pizza;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pizza`;
+  async getAllPizzas() {
+    return await this.prisma.pizza.findMany({});
   }
 }

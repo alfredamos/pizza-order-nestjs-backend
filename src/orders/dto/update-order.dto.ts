@@ -1,4 +1,7 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateOrderDto } from './create-order.dto';
-
-export class UpdateOrderDto extends PartialType(CreateOrderDto) {}
+/* eslint-disable prettier/prettier */
+import { IsUUID } from "class-validator";
+import { CreateOrderDto } from "./create-order.dto";
+export class UpdateOrderDto extends CreateOrderDto{
+  @IsUUID()
+  id: string;
+}

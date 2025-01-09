@@ -33,7 +33,7 @@ export class PizzasService {
     return editedPizza;
   }
 
-  async deletedPizza(id: string) {
+  async deletePizza(id: string) {
     await this.detailPizza(id);
 
     const deletedPizza = await this.prisma.pizza.delete({ where: { id } });

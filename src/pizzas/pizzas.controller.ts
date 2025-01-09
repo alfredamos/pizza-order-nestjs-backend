@@ -48,6 +48,6 @@ export class PizzasController {
   @Roles('Admin', 'Staff', 'User')
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return await this.pizzasService.deletedPizza(id);
+    return await this.pizzasService.deletePizza(id);
   }
 }

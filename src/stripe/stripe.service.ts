@@ -15,13 +15,19 @@ export class StripeService {
     });
   }
 
-  async getProducts(): Promise<Stripe.Product[]> {
+  async getProducts(): Promise<Stripe.Product[]> {   
     const products = await this.stripe.products.list();
+    
+    console.log({products})
+    
     return products.data;
   }
 
   async getCustomers(): Promise<Stripe.Customer[]> {
     const customers = await this.stripe.customers.list({});
+    
+    console.log({customers})
+    
     return customers.data;
   }
   async paymentCheckout(orderPayload: CreateOrderDto) {
@@ -48,7 +54,7 @@ export class StripeService {
       cancel_url: `${process.env.BASE_URL}/payment-failure`,
     });
 
-    const { id, url, status } = session;
+    const { id} = session;
 
     //-----> If there's sessionPayload, then store the order in the database.
     if (!!id) {
@@ -57,6 +63,6 @@ export class StripeService {
       await this.orderService.orderCreate(orderPayload);
     }
 
-    return { id, url, status };
+    return session;
   }
 }

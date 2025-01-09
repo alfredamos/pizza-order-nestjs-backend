@@ -6,7 +6,7 @@ import { Role, User } from '@prisma/client';
 import { ChangePasswordDto } from './dto/change-password.Dto';
 import { EditProfileDto } from './dto/edit-profile.Dto';
 import { LoginDto } from './dto/loginDto';
-import bcrypt from "bcryptjs"
+import * as bcrypt from "bcryptjs"
 import { AuthResponseModel } from 'src/models/authResponse.model';
 import { SignupDto } from './dto/signup.dto';
 import { PrismaService } from 'src/prisma/prisma.service';

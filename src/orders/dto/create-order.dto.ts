@@ -13,7 +13,6 @@ export class CreateOrderDto {
   @IsNotEmpty()
   @IsArray()
   cartItems: CartItem[];
-  @IsNotEmpty()
   @IsString()
   paymentId: string;
   @IsNotEmpty()

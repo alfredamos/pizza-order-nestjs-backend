@@ -18,15 +18,11 @@ export class StripeService {
   async getProducts(): Promise<Stripe.Product[]> {   
     const products = await this.stripe.products.list();
     
-    console.log({products})
-    
     return products.data;
   }
 
   async getCustomers(): Promise<Stripe.Customer[]> {
     const customers = await this.stripe.customers.list({});
-    
-    console.log({customers})
     
     return customers.data;
   }
